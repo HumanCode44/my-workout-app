@@ -1,36 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, StyleSheet, FlatList, Alert, TouchableOpacity, Platform, StatusBar, SafeAreaView } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-
-type Exercise = {
-  name: string;
-  sets: number;
-  reps: number;
-  weight: number;
-  key: string;
-};
-
-type WorkoutEntry = {
-  date: string;
-  day: string;
-  mood: string;
-  program: string;
-  workoutName: string;
-  exercise: string;
-  sets: number;
-  reps: number;
-  weight: number;
-  key: string;
-};
-
-type WorkoutTemplates = {
-  [program: string]: {
-    [day: string]: {
-      [mood: string]: string[];
-    };
-  };
-};
+import workoutTemplates from './assets/workoutTemplates.json';
+import { Exercise, WorkoutEntry, WorkoutTemplates } from './src/types/workoutTypes';
 
 export default function App() {
   const [mood, setMood] = useState<string>('Good');
@@ -44,86 +17,34 @@ export default function App() {
   const [reps, setReps] = useState<number>(10);
   const [weight, setWeight] = useState<number>(0);
   const [suggestedExercises, setSuggestedExercises] = useState<Exercise[]>([]);
+  const [workouts, setWorkouts] = useState<WorkoutTemplates>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const focusProgram = program;
+  const focusDay = day.toLowerCase();
+  const moodLevel = mood.toLowerCase();
+  const suggested = workouts[focusProgram]?.[focusDay]?.[moodLevel] || [];
 
-  // Workout templates
-  const workouts: WorkoutTemplates = {
-    "Basic": {
-      monday: {
-        okay: ['Incline DB press', 'Dips'],
-        good: ['Bench press', 'Incline bench press', 'Pec fly', 'Tricep pushdown', 'Overhead triceps extension'],
-        great: ['Bench press', 'Incline bench press', 'Pec fly', 'Dips', 'Cable crossover', 'Tricep pushdown', 'Overhead triceps extension']
-      },
-      tuesday: {
-        okay: ['Lat pulldown', 'Straight-arm pulldown'],
-        good: ['Pull-ups', 'Barbell row', 'Seated cable row', 'Face pulls', 'Bicep curls'],
-        great: ['Pull-ups', 'Barbell row', 'T-bar row', 'Lat pulldown', 'Seated cable row', 'Face pulls', 'Bicep curls', 'Hammer curls']
-      },
-      wednesday: {
-        okay: ['Rest'],
-        good: ['Light Walk'],
-        great: ['Cardio']
-      },
-      thursday: {
-        okay: ['Lateral raises', 'Overhead press'],
-        good: ['Overhead press', 'Lateral raises', 'Front raises', 'Rear delt fly'],
-        great: ['Overhead press', 'Arnold press', 'Lateral raises', 'Front raises', 'Rear delt fly', 'Shrugs']
-      },
-      friday: {
-        okay: ['Bodyweight squats', 'Leg curl machine'],
-        good: ['Back squat', 'Leg press', 'Leg curl', 'Walking lunges', 'Calf raises'],
-        great: ['Back squat', 'Hack Squat', 'Romanian deadlift', 'Leg press', 'Walking lunges', 'Calf raises', 'Hip thrusts']
-      },
-      saturday: {
-        okay: ['Rest'],
-        good: ['Light Walk'],
-        great: ['Cardio']
-      },
-      sunday: {
-        okay: ['Rest'],
-        good: ['Light Walk'],
-        great: ['Cardio']
-      }
-    },
-    "6-Day PPL": {
-      monday: { // Push day
-        okay: ['Bench Press ', 'Overhead Press', 'Triceps Dips'],
-        good: ['Bench Press', 'Incline Dumbbell Press', 'Overhead Press ', 'Lateral Raises', 'CableTriceps Pushdowns'],
-        great: ['Bench Press ', 'Incline Dumbbell Press ', 'Overhead Press', 'Lateral Raises ', 'Cable Flys ', 'Skull Crushers', 'Triceps Rope Pushdown']
-      },
-      tuesday: { // Pull day
-        okay: ['Deadlifts ', 'Pull-Ups ', 'Barbell Rows '],
-        good: ['Deadlifts ', 'Pull-Ups ', 'Barbell Rows ', 'Face Pulls', 'Dumbbell Curls'],
-        great: ['Deadlifts ', 'Pull-Ups ', 'Barbell Rows ', 'T-Bar Rows', 'Face Pulls ', 'Hammer Curls', 'Preacher Curls']
-      },
-      wednesday: { // Legs day
-        okay: ['Squats ', 'Romanian Deadlifts ', 'Leg Press'],
-        good: ['Squats', 'Romanian Deadlifts ', 'Leg Press', 'Leg Curls', 'Calf Raises '],
-        great: ['Squats ', 'Romanian Deadlifts ', 'Bulgarian Split Squats', 'Leg Extensions ', 'Seated Leg Curls ', 'Seated Calf Raises ', 'Slant Board Sit Up ']
-      },
-      thursday: { // Push day
-        okay: ['Bench Press ', 'Overhead Press ', 'Triceps Dips'],
-        good: ['Bench Press', 'Incline Dumbbell Press', 'Overhead Press ', 'Lateral Raises', 'CableTriceps Pushdowns'],
-        great: ['Bench Press ', 'Incline Dumbbell Press ', 'Overhead Press', 'Lateral Raises ', 'Cable Flys ', 'Skull Crushers', 'Triceps Rope Pushdown']
-      },
-      friday: { // Pull day
-        okay: ['Deadlifts ', 'Pull-Ups ', 'Barbell Rows '],
-        good: ['Deadlifts ', 'Pull-Ups ', 'Barbell Rows ', 'Face Pulls', 'Dumbbell Curls'],
-        great: ['Deadlifts ', 'Pull-Ups ', 'Barbell Rows ', 'T-Bar Rows', 'Face Pulls ', 'Hammer Curls', 'Preacher Curls']
-      },
-      saturday: { // Legs day
-        okay: ['Squats ', 'Romanian Deadlifts ', 'Leg Press'],
-        good: ['Squats', 'Romanian Deadlifts ', 'Leg Press', 'Leg Curls', 'Calf Raises '],
-        great: ['Squats ', 'Romanian Deadlifts ', 'Bulgarian Split Squats', 'Leg Extensions ', 'Seated Leg Curls ', 'Seated Calf Raises ', 'Slant Board Sit Up ']
-      },
-      sunday: {
-        okay: ['Rest'],
-        good: ['Rest'],
-        great: ['Rest']
-      }
-    }
-  };
+    // Modify your generateSuggestedWorkout to handle loading state
+
+
+    useEffect(() => {
+      // Load the workout templates
+       try {
+        // In a real app, you might load this asynchronously from a file
+      setWorkouts(workoutTemplates);
+      setIsLoading(false);
+      } catch (error) {
+      console.error('Error loading workout templates:', error);
+      Alert.alert('Error', 'Failed to load workout templates');
+      setIsLoading(false);
+  }
+}, []);
 
   const generateSuggestedWorkout = () => {
+    if (isLoading) {
+    Alert.alert('Loading', 'Workout templates are still loading');
+    return;
+    }
     const focusProgram = program;
     const focusDay = day.toLowerCase();
     const moodLevel = mood.toLowerCase();
@@ -279,7 +200,7 @@ export default function App() {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.daysContainer}
           >
-            {['Basic', '6-Day PPL'].map(p => (
+            {["5-Day Bro Split", "6-Day PPL","For The Girls","Hybrid Training","Intermediate","Boring But Big"].map(p => (
               <TouchableOpacity
                 key={p}
                 style={[styles.dayButton, program === p && styles.activeDayButton]}

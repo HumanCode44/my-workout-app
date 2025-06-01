@@ -1,0 +1,224 @@
+{
+  "6-Day PPL": {
+    "monday": {
+      "okay": ["Bench Press", "Overhead Press", "Triceps Dips"],
+      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns"],
+      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Cable Flys", "Skull Crushers", "Triceps Rope Pushdown"]
+    },
+    "tuesday": {
+      "okay": ["Deadlifts", "Pull-Ups", "Barbell Rows"],
+      "good": ["Deadlifts", "Pull-Ups", "Barbell Rows", "Face Pulls", "Dumbbell Curls"],
+      "great": ["Deadlifts", "Pull-Ups", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Hammer Curls", "Preacher Curls"]
+    },
+    "wednesday": {
+      "okay": ["Squats", "Romanian Deadlifts", "Leg Press"],
+      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls", "Calf Raises"],
+      "great": ["Squats", "Romanian Deadlifts", "Bulgarian Split Squats", "Leg Extensions", "Leg Curls", "Seated Calf Raises", "Standing Calf Raises"]
+    },
+    "thursday": {
+      "okay": ["Bench Press", "Overhead Press", "Triceps Dips"],
+      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns"],
+      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Cable Flys", "Skull Crushers", "Triceps Rope Pushdown"]
+    },
+    "friday": {
+      "okay": ["Deadlifts", "Pull-Ups", "Barbell Rows"],
+      "good": ["Deadlifts", "Pull-Ups", "Barbell Rows", "Face Pulls", "Dumbbell Curls"],
+      "great": ["Deadlifts", "Pull-Ups", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Hammer Curls", "Preacher Curls"]
+    },
+    "saturday": {
+      "okay": ["Squats", "Romanian Deadlifts", "Leg Press"],
+      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls", "Calf Raises"],
+      "great": ["Squats", "Romanian Deadlifts", "Bulgarian Split Squats", "Leg Extensions", "Leg Curls", "Seated Calf Raises", "Standing Calf Raises"]
+    },
+    "sunday": {
+      "okay": ["Rest"],
+      "good": ["Rest"],
+      "great": ["Rest"]
+    }
+  },
+  "5-Day Bro Split": {
+    "monday": {
+      "okay": ["Flat Bench Press", "Incline Dumbbell Press"],
+      "good": ["Flat Bench Press", "Incline Dumbbell Press", "Cable Flys", "Dips"],
+      "great": ["Flat Bench Press", "Incline Dumbbell Press", "Decline Bench", "Cable Flys", "Dips", "Push-Ups"]
+    },
+    "tuesday": {
+      "okay": ["Deadlifts", "Lat Pulldowns"],
+      "good": ["Deadlifts", "Lat Pulldowns", "Barbell Rows", "Face Pulls"],
+      "great": ["Deadlifts", "Lat Pulldowns", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Straight-Arm Pulldowns"]
+    },
+    "wednesday": {
+      "okay": ["Overhead Press", "Lateral Raises"],
+      "good": ["Overhead Press", "Lateral Raises", "Front Raises", "Face Pulls"],
+      "great": ["Overhead Press", "Lateral Raises", "Front Raises", "Face Pulls", "Upright Rows", "Shrugs"]
+    },
+    "thursday": {
+      "okay": ["Barbell Curls", "Triceps Dips"],
+      "good": ["Barbell Curls", "Hammer Curls", "Triceps Pushdowns", "Overhead Triceps Extension"],
+      "great": ["Barbell Curls", "Hammer Curls", "Preacher Curls", "Triceps Pushdowns", "Skull Crushers", "Overhead Triceps Extension"]
+    },
+    "friday": {
+      "okay": ["Squats", "Leg Press"],
+      "good": ["Squats", "Leg Press", "Romanian Deadlifts", "Leg Curls"],
+      "great": ["Squats", "Leg Press", "Romanian Deadlifts", "Bulgarian Split Squats", "Leg Extensions", "Leg Curls"]
+    },
+    "saturday": {
+      "okay": ["Rest"],
+      "good": ["Light Walk"],
+      "great": ["Cardio"]
+    },
+    "sunday": {
+      "okay": ["Rest"],
+      "good": ["Light Walk"],
+      "great": ["Cardio"]
+    }
+  },
+  "For The Girls": {
+    "monday": {
+      "okay": ["Hip Thrusts", "Romanian Deadlifts", "Glute Kickbacks"],
+      "good": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs"],
+      "great": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs", "Glute Bridges", "Seated Leg Curls"]
+    },
+    "tuesday": {
+      "okay": ["Squats", "Leg Extensions"],
+      "good": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups"],
+      "great": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups", "Lunges", "Hack Squats"]
+    },
+    "wednesday": {
+      "okay": ["Lat Pulldowns", "Seated Rows"],
+      "good": ["Lat Pulldowns", "Seated Rows", "Dumbbell Press", "Bicep Curls"],
+      "great": ["Lat Pulldowns", "Seated Rows", "Dumbbell Press", "Face Pulls", "Bicep Curls", "Triceps Pushdowns"]
+    },
+    "thursday": {
+      "okay": ["Rest"],
+      "good": ["Light Walk"],
+      "great": ["Yoga"]
+    },
+    "friday": {
+      "okay": ["Hip Thrusts", "Romanian Deadlifts", "Glute Kickbacks"],
+      "good": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs"],
+      "great": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs", "Glute Bridges", "Seated Leg Curls"]
+    },
+    "saturday": {
+      "okay": ["Squats", "Leg Extensions"],
+      "good": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups"],
+      "great": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups", "Lunges", "Hack Squats"]
+    },
+    "sunday": {
+      "okay": ["Rest"],
+      "good": ["Light Walk"],
+      "great": ["Yoga"]
+    }
+  },
+  "Hybrid Training": {
+    "monday": {
+      "okay": ["Bench Press", "Overhead Press"],
+      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Triceps Dips"],
+      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Dips", "Skull Crushers"]
+    },
+    "tuesday": {
+      "okay": ["30-Minute Run"],
+      "good": ["45-Minute Run"],
+      "great": ["60-Minute Run"]
+    },
+    "wednesday": {
+      "okay": ["Squats", "Romanian Deadlifts"],
+      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls"],
+      "great": ["Squats", "Romanian Deadlifts", "Leg Press", "Bulgarian Split Squats", "Leg Curls", "Calf Raises"]
+    },
+    "thursday": {
+      "okay": ["Sprint Intervals (10x30s)"],
+      "good": ["Hill Sprints (8x45s)"],
+      "great": ["Track Workout (400m repeats)"]
+    },
+    "friday": {
+      "okay": ["Deadlifts", "Pull-Ups"],
+      "good": ["Deadlifts", "Pull-Ups", "Barbell Rows", "Face Pulls"],
+      "great": ["Deadlifts", "Pull-Ups", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Hammer Curls"]
+    },
+    "saturday": {
+      "okay": ["45-Minute Run"],
+      "good": ["60-Minute Run"],
+      "great": ["90-Minute Run"]
+    },
+    "sunday": {
+      "okay": ["Rest"],
+      "good": ["Rest"],
+      "great": ["Rest"]
+    }
+  },
+  "Intermediate": {
+    "monday": {
+      "okay": ["Bench Press", "Overhead Press"],
+      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Triceps Pushdowns"],
+      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns", "Cable Flys"]
+    },
+    "tuesday": {
+      "okay": ["Deadlifts", "Barbell Rows"],
+      "good": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls"],
+      "great": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls", "T-Bar Rows", "Shrugs"]
+    },
+    "wednesday": {
+      "okay": ["Squats", "Romanian Deadlifts"],
+      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls"],
+      "great": ["Squats", "Romanian Deadlifts", "Leg Press", "Bulgarian Split Squats", "Leg Curls", "Calf Raises"]
+    },
+    "thursday": {
+      "okay": ["Rest"],
+      "good": ["Light Walk"],
+      "great": ["Cardio"]
+    },
+    "friday": {
+      "okay": ["Bench Press", "Overhead Press"],
+      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Triceps Pushdowns"],
+      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns", "Cable Flys"]
+    },
+    "saturday": {
+      "okay": ["Deadlifts", "Barbell Rows"],
+      "good": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls"],
+      "great": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls", "T-Bar Rows", "Shrugs"]
+    },
+    "sunday": {
+      "okay": ["Rest"],
+      "good": ["Rest"],
+      "great": ["Rest"]
+    }
+  },
+  "Boring But Big": {
+    "monday": {
+      "okay": ["Bench Press (5/3/1)", "Bench Press (5x10)"],
+      "good": ["Bench Press (5/3/1)", "Bench Press (5x10)", "Incline Dumbbell Press", "Triceps Pushdowns"],
+      "great": ["Bench Press (5/3/1)", "Bench Press (5x10)", "Incline Dumbbell Press", "Cable Flys", "Triceps Pushdowns", "Skull Crushers"]
+    },
+    "tuesday": {
+      "okay": ["Squats (5/3/1)", "Squats (5x10)"],
+      "good": ["Squats (5/3/1)", "Squats (5x10)", "Leg Press", "Leg Curls"],
+      "great": ["Squats (5/3/1)", "Squats (5x10)", "Leg Press", "Bulgarian Split Squats", "Leg Curls", "Calf Raises"]
+    },
+    "wednesday": {
+      "okay": ["Overhead Press (5/3/1)", "Overhead Press (5x10)"],
+      "good": ["Overhead Press (5/3/1)", "Overhead Press (5x10)", "Lateral Raises", "Face Pulls"],
+      "great": ["Overhead Press (5/3/1)", "Overhead Press (5x10)", "Lateral Raises", "Front Raises", "Face Pulls", "Shrugs"]
+    },
+    "thursday": {
+      "okay": ["Deadlifts (5/3/1)", "Deadlifts (5x10)"],
+      "good": ["Deadlifts (5/3/1)", "Deadlifts (5x10)", "Barbell Rows", "Lat Pulldowns"],
+      "great": ["Deadlifts (5/3/1)", "Deadlifts (5x10)", "Barbell Rows", "Lat Pulldowns", "T-Bar Rows", "Face Pulls"]
+    },
+    "friday": {
+      "okay": ["Rest"],
+      "good": ["Light Walk"],
+      "great": ["Cardio"]
+    },
+    "saturday": {
+      "okay": ["Rest"],
+      "good": ["Light Walk"],
+      "great": ["Cardio"]
+    },
+    "sunday": {
+      "okay": ["Rest"],
+      "good": ["Rest"],
+      "great": ["Rest"]
+    }
+  }
+}

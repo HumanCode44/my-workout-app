@@ -2,13 +2,55 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, StyleSheet, FlatList, Alert, TouchableOpacity, Platform, StatusBar, SafeAreaView } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-import workoutTemplates from './assets/workoutTemplates.json';
-import { Exercise, WorkoutEntry, WorkoutTemplates } from './src/types/workoutTypes';
+import rawWorkoutTemplates from './assets/workoutTemplates.json';;
+import type { workoutTemplates } from 'src/types/workoutTypes';
+
+type ExerciseType = 'weight' | 'cardio' | 'bodyweight' | 'yoga';
+
+interface ExerciseTemplate {
+  name: string;
+  type: ExerciseType;
+  sets?: number;
+  reps?: number | string;  // Allow both numbers and strings
+  weight?: number;
+  rest?: string;
+  duration?: string;
+  work?: string;
+  description?: string;
+  notes?: string;
+  key?: string; // Add this line
+}
+
+interface WorkoutEntry {
+  date: string;
+  day: string;
+  mood: string;
+  program: string;
+  workoutName: string;
+  exercise: string;
+  sets?: number;
+  reps?: number | string;  // Allow both numbers and strings
+  weight?: number;
+  duration?: string;
+  rest?: string;
+  type: ExerciseType;
+  key: string;
+}
+
+interface WorkoutTemplates {
+  [program: string]: {
+    [day: string]: {
+      [mood: string]: ExerciseTemplate[];
+    };
+  };
+}
 
 export default function App() {
   const [mood, setMood] = useState<string>('Good');
+  const [workouts, setWorkouts] = useState<WorkoutTemplates>({});
+  const workoutTemplates = rawWorkoutTemplates as unknown as WorkoutTemplates;
   const [day, setDay] = useState<string>('Monday');
-  const [program, setProgram] = useState<string>('Basic');
+  const [program, setProgram] = useState<string>(Object.keys(workoutTemplates)[0]);
   const [mode, setMode] = useState<'Suggested' | 'Custom'>('Suggested');
   const [workoutLog, setWorkoutLog] = useState<WorkoutEntry[]>([]);
   const [workoutName, setWorkoutName] = useState<string>('');
@@ -16,60 +58,45 @@ export default function App() {
   const [sets, setSets] = useState<number>(3);
   const [reps, setReps] = useState<number>(10);
   const [weight, setWeight] = useState<number>(0);
-  const [suggestedExercises, setSuggestedExercises] = useState<Exercise[]>([]);
-  const [workouts, setWorkouts] = useState<WorkoutTemplates>({});
+  const [rest, setRest] = useState<string>('60s');
+  const [duration, setDuration] = useState<string>('30min');
+  const [suggestedExercises, setSuggestedExercises] = useState<ExerciseTemplate[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const focusProgram = program;
-  const focusDay = day.toLowerCase();
-  const moodLevel = mood.toLowerCase();
-  const suggested = workouts[focusProgram]?.[focusDay]?.[moodLevel] || [];
+  
 
-    // Modify your generateSuggestedWorkout to handle loading state
-
-
-    useEffect(() => {
-      // Load the workout templates
-       try {
-        // In a real app, you might load this asynchronously from a file
+  useEffect(() => {
+    try {
       setWorkouts(workoutTemplates);
+      // Set to first program if not set
+      if (!program && Object.keys(workoutTemplates).length > 0) {
+        setProgram(Object.keys(workoutTemplates)[0]);
+      }
       setIsLoading(false);
-      } catch (error) {
-      console.error('Error loading workout templates:', error);
-      Alert.alert('Error', 'Failed to load workout templates');
+    } catch (error) {
+      console.error('Error loading templates:', error);
       setIsLoading(false);
   }
 }, []);
 
   const generateSuggestedWorkout = () => {
     if (isLoading) {
-    Alert.alert('Loading', 'Workout templates are still loading');
-    return;
+      Alert.alert('Loading', 'Workout templates are still loading');
+      return;
     }
+    
     const focusProgram = program;
     const focusDay = day.toLowerCase();
     const moodLevel = mood.toLowerCase();
+
+    console.log(`Looking for: ${focusProgram}.${focusDay}.${moodLevel}`); // Debug
+
     const suggested = workouts[focusProgram]?.[focusDay]?.[moodLevel] || [];
+    console.log("Found exercises:", suggested); // Debug
     
     const exercises = suggested.map((ex, index) => {
-      let name = ex;
-      let suggestedSets = 3;
-      let suggestedReps = 10;
-      
-      if (ex.toLowerCase().includes('x')) {
-        const parts = ex.split(' ');
-        const [sets, reps] = parts[0].toLowerCase().split('x').map(Number);
-        if (!isNaN(sets) && !isNaN(reps)) {
-          suggestedSets = sets;
-          suggestedReps = reps;
-          name = parts.slice(1).join(' ');
-        }
-      }
-      
       return {
-        name,
-        sets: suggestedSets,
-        reps: suggestedReps,
-        weight: 0,
+        ...ex,
+        weight: ex.weight || 0,
         key: `ex-${index}-${Date.now()}`
       };
     });
@@ -78,27 +105,51 @@ export default function App() {
   };
 
   const saveSuggestedWorkout = () => {
-    const newEntries = suggestedExercises.map(ex => ({
-      date: new Date().toISOString().split('T')[0],
-      day,
-      mood,
-      program,
-      workoutName: `${program} Workout`,
-      exercise: ex.name,
-      sets: ex.sets,
-      reps: ex.reps,
-      weight: ex.weight,
-      key: `entry-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-    }));
-    
-    setWorkoutLog([...workoutLog, ...newEntries]);
-    Alert.alert('Success', 'Workout saved to your log!');
-  };
-
+  const newEntries: WorkoutEntry[] = suggestedExercises.map(ex => ({
+    date: new Date().toISOString().split('T')[0],
+    day,
+    mood,
+    program,
+    workoutName: `${program} Workout`,
+    exercise: ex.name,
+    sets: ex.sets,
+    reps: ex.reps,  // This can now be number or string
+    weight: ex.weight,
+    duration: ex.duration,
+    rest: ex.rest,
+    type: ex.type,
+    key: `entry-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  }));
+  
+  setWorkoutLog([...workoutLog, ...newEntries]);
+  Alert.alert('Success', 'Workout saved to your log!');
+};
+useEffect(() => {
+  try {
+    setWorkouts(workoutTemplates);
+    console.log("Loaded templates:", Object.keys(workoutTemplates)); // Debug log
+    setIsLoading(false);
+  } catch (error) {
+    console.error('Error loading templates:', error);
+    Alert.alert('Error', 'Failed to load templates');
+    setIsLoading(false);
+  }
+}, []);
   const addCustomExercise = () => {
     if (!workoutName || !exercise) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
+    }
+    
+    let exerciseType: ExerciseType = 'weight';
+    const lowerCaseExercise = exercise.toLowerCase();
+    
+    if (['walk', 'run', 'jog', 'bike', 'swim'].includes(lowerCaseExercise)) {
+      exerciseType = 'cardio';
+    } else if (['yoga', 'stretch', 'meditation'].includes(lowerCaseExercise)) {
+      exerciseType = 'yoga';
+    } else if (['pushup', 'pullup', 'situp', 'bodyweight'].includes(lowerCaseExercise)) {
+      exerciseType = 'bodyweight';
     }
     
     const newEntry: WorkoutEntry = {
@@ -108,9 +159,12 @@ export default function App() {
       program,
       workoutName,
       exercise,
-      sets,
-      reps,
-      weight,
+      sets: exerciseType === 'cardio' || exerciseType === 'yoga' ? undefined : sets,
+      reps: exerciseType === 'cardio' || exerciseType === 'yoga' ? undefined : reps,
+      weight: exerciseType === 'weight' ? weight : undefined,
+      duration: exerciseType === 'cardio' || exerciseType === 'yoga' ? duration : undefined,
+      rest: exerciseType !== 'cardio' && exerciseType !== 'yoga' ? rest : undefined,
+      type: exerciseType,
       key: `entry-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
     };
     
@@ -126,10 +180,15 @@ export default function App() {
       return;
     }
 
-    const headers = Object.keys(workoutLog[0]).filter(k => k !== 'key').join(',');
+    const headers = Object.keys(workoutLog[0])
+      .filter(k => k !== 'key')
+      .join(',');
+      
     const rows = workoutLog.map(entry => {
       const { key, ...rest } = entry;
-      return Object.values(rest).join(',');
+      return Object.values(rest).map(val => 
+        val === undefined ? '' : `"${val}"`
+      ).join(',');
     }).join('\n');
     
     const csv = `${headers}\n${rows}`;
@@ -163,17 +222,20 @@ export default function App() {
     );
   };
 
+  const isCardioOrYoga = () => {
+    const lowerCaseExercise = exercise.toLowerCase();
+    return ['walk', 'run', 'yoga', 'stretch', 'meditation'].includes(lowerCaseExercise);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {/* Header with proper spacing */}
         <View style={styles.header}>
           <Text style={styles.title}>🏋️ Workout Planner</Text>
           <Text style={styles.subtitle}>Generate suggested workouts or build your own session</Text>
         </View>
         
-        {/* Mode Toggle */}
         <View style={styles.toggleContainer}>
           <TouchableOpacity
             style={[styles.toggleButton, mode === 'Suggested' && styles.activeToggle]}
@@ -189,29 +251,11 @@ export default function App() {
           </TouchableOpacity>
         </View>
         
-        {/* Settings Card */}
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Today's Activity</Text>
           
-          {/* Program Selection */}
           <Text style={styles.label}>What program are you working on?</Text>
-          <ScrollView 
-            horizontal 
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.daysContainer}
-          >
-            {["5-Day Bro Split", "6-Day PPL","For The Girls","Hybrid Training","Intermediate","Boring But Big"].map(p => (
-              <TouchableOpacity
-                key={p}
-                style={[styles.dayButton, program === p && styles.activeDayButton]}
-                onPress={() => setProgram(p)}
-              >
-                <Text style={[styles.dayButtonText, program === p && styles.activeDayButtonText]}>{p}</Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
           
-          {/* Mood Selection */}
           <Text style={styles.label}>How are you feeling?</Text>
           <View style={styles.segmentedControl}>
             {['Okay', 'Good', 'Great'].map(option => (
@@ -224,8 +268,20 @@ export default function App() {
               </TouchableOpacity>
             ))}
           </View>
-          
-          {/* Day Selection */}
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {Object.keys(workouts).map(p => (
+              <TouchableOpacity
+              key={p}
+              style={[styles.dayButton, program === p && styles.activeDayButton]}
+              onPress={() => {
+              console.log("Selected program:", p); // Debug log
+              setProgram(p);
+              }}
+              >
+              <Text style={styles.dayButtonText}>{p}</Text>
+              </TouchableOpacity>
+              ))}
+              </ScrollView>
           <Text style={styles.label}>What day is it?</Text>
           <ScrollView 
             horizontal 
@@ -253,7 +309,6 @@ export default function App() {
           )}
         </View>
         
-        {/* Main Content */}
         {mode === 'Suggested' ? (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Suggested Workout</Text>
@@ -263,49 +318,94 @@ export default function App() {
                 {suggestedExercises.map((ex, index) => (
                   <View key={ex.key} style={styles.exerciseCard}>
                     <Text style={styles.exerciseName}>{ex.name}</Text>
-                    <Text style={styles.exerciseSubtitle}>Suggested: {ex.sets} sets × {ex.reps} reps</Text>
+                    {ex.type === 'cardio' || ex.type === 'yoga' ? (
+                      <Text style={styles.exerciseSubtitle}>
+                        Duration: {ex.duration || 'Not specified'}
+                      </Text>
+                    ) : (
+                      <Text style={styles.exerciseSubtitle}>
+                        Suggested: {ex.sets || 3} sets × {ex.reps || 10} reps
+                        {ex.rest ? ` (Rest: ${ex.rest})` : ''}
+                      </Text>
+                    )}
                     
-                    <View style={styles.inputRow}>
-                      <Text style={styles.inputLabel}>Weight (lbs):</Text>
-                      <TextInput
-                        style={styles.numberInput}
-                        keyboardType="numeric"
-                        value={ex.weight.toString()}
-                        onChangeText={(text) => {
-                          const newExercises = [...suggestedExercises];
-                          newExercises[index].weight = parseInt(text) || 0;
-                          setSuggestedExercises(newExercises);
-                        }}
-                      />
-                    </View>
+                    {ex.type === 'weight' && (
+                      <View style={styles.inputRow}>
+                        <Text style={styles.inputLabel}>Weight (lbs):</Text>
+                        <TextInput
+                          style={styles.numberInput}
+                          keyboardType="numeric"
+                          value={ex.weight?.toString() || '0'}
+                          onChangeText={(text) => {
+                            const newExercises = [...suggestedExercises];
+                            newExercises[index].weight = parseInt(text) || 0;
+                            setSuggestedExercises(newExercises);
+                          }}
+                        />
+                      </View>
+                    )}
                     
-                    <View style={styles.inputRow}>
-                      <Text style={styles.inputLabel}>Sets:</Text>
-                      <TextInput
-                        style={styles.numberInput}
-                        keyboardType="numeric"
-                        value={ex.sets.toString()}
-                        onChangeText={(text) => {
-                          const newExercises = [...suggestedExercises];
-                          newExercises[index].sets = parseInt(text) || 1;
-                          setSuggestedExercises(newExercises);
-                        }}
-                      />
-                    </View>
+                    {(ex.type === 'weight' || ex.type === 'bodyweight') && (
+                      <>
+                        <View style={styles.inputRow}>
+                          <Text style={styles.inputLabel}>Sets:</Text>
+                          <TextInput
+                            style={styles.numberInput}
+                            keyboardType="numeric"
+                            value={ex.sets?.toString() || '3'}
+                            onChangeText={(text) => {
+                              const newExercises = [...suggestedExercises];
+                              newExercises[index].sets = parseInt(text) || 1;
+                              setSuggestedExercises(newExercises);
+                            }}
+                          />
+                        </View>
+                        
+                        <View style={styles.inputRow}>
+                          <Text style={styles.inputLabel}>Reps:</Text>
+                          <TextInput
+                            style={styles.numberInput}
+                            keyboardType="numeric"
+                            value={ex.reps?.toString() || '10'}
+                            onChangeText={(text) => {
+                              const newExercises = [...suggestedExercises];
+                              newExercises[index].reps = parseInt(text) || 1;
+                              setSuggestedExercises(newExercises);
+                            }}
+                          />
+                        </View>
+                      </>
+                    )}
                     
-                    <View style={styles.inputRow}>
-                      <Text style={styles.inputLabel}>Reps:</Text>
-                      <TextInput
-                        style={styles.numberInput}
-                        keyboardType="numeric"
-                        value={ex.reps.toString()}
-                        onChangeText={(text) => {
-                          const newExercises = [...suggestedExercises];
-                          newExercises[index].reps = parseInt(text) || 1;
-                          setSuggestedExercises(newExercises);
-                        }}
-                      />
-                    </View>
+                    {ex.type === 'cardio' || ex.type === 'yoga' ? (
+                      <View style={styles.inputRow}>
+                        <Text style={styles.inputLabel}>Duration:</Text>
+                        <TextInput
+                          style={styles.numberInput}
+                          value={ex.duration || ''}
+                          onChangeText={(text) => {
+                            const newExercises = [...suggestedExercises];
+                            newExercises[index].duration = text;
+                            setSuggestedExercises(newExercises);
+                          }}
+                          placeholder="e.g., 30min"
+                        />
+                      </View>
+                    ) : (
+                      <View style={styles.inputRow}>
+                        <Text style={styles.inputLabel}>Rest:</Text>
+                        <TextInput
+                          style={styles.numberInput}
+                          value={ex.rest || ''}
+                          onChangeText={(text) => {
+                            const newExercises = [...suggestedExercises];
+                            newExercises[index].rest = text;
+                            setSuggestedExercises(newExercises);
+                          }}
+                          placeholder="e.g., 60s"
+                        />
+                      </View>
+                    )}
                   </View>
                 ))}
                 
@@ -340,35 +440,61 @@ export default function App() {
               onChangeText={setExercise}
             />
             
-            <View style={styles.inputRow}>
-              <Text style={styles.inputLabel}>Sets:</Text>
-              <TextInput
-                style={styles.numberInput}
-                keyboardType="numeric"
-                value={sets.toString()}
-                onChangeText={(text) => setSets(parseInt(text) || 1)}
-              />
-            </View>
+            {!isCardioOrYoga() && (
+              <>
+                <View style={styles.inputRow}>
+                  <Text style={styles.inputLabel}>Sets:</Text>
+                  <TextInput
+                    style={styles.numberInput}
+                    keyboardType="numeric"
+                    value={sets.toString()}
+                    onChangeText={(text) => setSets(parseInt(text) || 1)}
+                  />
+                </View>
+                
+                <View style={styles.inputRow}>
+                  <Text style={styles.inputLabel}>Reps:</Text>
+                  <TextInput
+                    style={styles.numberInput}
+                    keyboardType="numeric"
+                    value={reps.toString()}
+                    onChangeText={(text) => setReps(parseInt(text) || 1)}
+                  />
+                </View>
+                
+                <View style={styles.inputRow}>
+                  <Text style={styles.inputLabel}>Weight (lbs):</Text>
+                  <TextInput
+                    style={styles.numberInput}
+                    keyboardType="numeric"
+                    value={weight.toString()}
+                    onChangeText={(text) => setWeight(parseInt(text) || 0)}
+                  />
+                </View>
+                
+                <View style={styles.inputRow}>
+                  <Text style={styles.inputLabel}>Rest:</Text>
+                  <TextInput
+                    style={styles.numberInput}
+                    value={rest}
+                    onChangeText={setRest}
+                    placeholder="e.g., 60s"
+                  />
+                </View>
+              </>
+            )}
             
-            <View style={styles.inputRow}>
-              <Text style={styles.inputLabel}>Reps:</Text>
-              <TextInput
-                style={styles.numberInput}
-                keyboardType="numeric"
-                value={reps.toString()}
-                onChangeText={(text) => setReps(parseInt(text) || 1)}
-              />
-            </View>
-            
-            <View style={styles.inputRow}>
-              <Text style={styles.inputLabel}>Weight (lbs):</Text>
-              <TextInput
-                style={styles.numberInput}
-                keyboardType="numeric"
-                value={weight.toString()}
-                onChangeText={(text) => setWeight(parseInt(text) || 0)}
-              />
-            </View>
+            {isCardioOrYoga() && (
+              <View style={styles.inputRow}>
+                <Text style={styles.inputLabel}>Duration:</Text>
+                <TextInput
+                  style={styles.numberInput}
+                  value={duration}
+                  onChangeText={setDuration}
+                  placeholder="e.g., 30min"
+                />
+              </View>
+            )}
             
             <TouchableOpacity
               style={styles.addButton}
@@ -385,7 +511,14 @@ export default function App() {
                   renderItem={({ item }) => (
                     <View style={styles.logEntry}>
                       <Text style={styles.logHeader}>{item.workoutName} - {item.day} ({item.program})</Text>
-                      <Text style={styles.logText}>{item.exercise}: {item.sets}×{item.reps} @ {item.weight}lbs</Text>
+                      {item.type === 'cardio' || item.type === 'yoga' ? (
+                        <Text style={styles.logText}>{item.exercise}: {item.duration}</Text>
+                      ) : (
+                        <Text style={styles.logText}>
+                          {item.exercise}: {item.sets}×{item.reps} @ {item.weight}lbs
+                          {item.rest ? ` (Rest: ${item.rest})` : ''}
+                        </Text>
+                      )}
                     </View>
                   )}
                   keyExtractor={item => item.key}

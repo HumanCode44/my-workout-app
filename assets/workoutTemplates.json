@@ -1,224 +1,720 @@
 {
   "6-Day PPL": {
     "monday": {
-      "okay": ["Bench Press", "Overhead Press", "Triceps Dips"],
-      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns"],
-      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Cable Flys", "Skull Crushers", "Triceps Rope Pushdown"]
+      "okay": [
+        { "name": "Bench Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Triceps Dips", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Bench Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Bench Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Cable Flys", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Skull Crushers", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Rope Pushdown", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "tuesday": {
-      "okay": ["Deadlifts", "Pull-Ups", "Barbell Rows"],
-      "good": ["Deadlifts", "Pull-Ups", "Barbell Rows", "Face Pulls", "Dumbbell Curls"],
-      "great": ["Deadlifts", "Pull-Ups", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Hammer Curls", "Preacher Curls"]
+      "okay": [
+        { "name": "Deadlifts", "sets": 3, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 3, "reps": "AMRAP", "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 4, "reps": "AMRAP", "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Dumbbell Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 4, "reps": "AMRAP", "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "T-Bar Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Hammer Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Preacher Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ]
     },
     "wednesday": {
-      "okay": ["Squats", "Romanian Deadlifts", "Leg Press"],
-      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls", "Calf Raises"],
-      "great": ["Squats", "Romanian Deadlifts", "Bulgarian Split Squats", "Leg Extensions", "Leg Curls", "Seated Calf Raises", "Standing Calf Raises"]
+      "okay": [
+        { "name": "Squats", "sets": 3, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Calf Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Seated Calf Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Standing Calf Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ]
     },
     "thursday": {
-      "okay": ["Bench Press", "Overhead Press", "Triceps Dips"],
-      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns"],
-      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Cable Flys", "Skull Crushers", "Triceps Rope Pushdown"]
+      "okay": [
+        { "name": "Bench Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Triceps Dips", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Bench Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Bench Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Cable Flys", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Skull Crushers", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Rope Pushdown", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "friday": {
-      "okay": ["Deadlifts", "Pull-Ups", "Barbell Rows"],
-      "good": ["Deadlifts", "Pull-Ups", "Barbell Rows", "Face Pulls", "Dumbbell Curls"],
-      "great": ["Deadlifts", "Pull-Ups", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Hammer Curls", "Preacher Curls"]
+      "okay": [
+        { "name": "Deadlifts", "sets": 3, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 3, "reps": "AMRAP", "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 4, "reps": "AMRAP", "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Dumbbell Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 4, "reps": "AMRAP", "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "T-Bar Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Hammer Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Preacher Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ]
     },
     "saturday": {
-      "okay": ["Squats", "Romanian Deadlifts", "Leg Press"],
-      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls", "Calf Raises"],
-      "great": ["Squats", "Romanian Deadlifts", "Bulgarian Split Squats", "Leg Extensions", "Leg Curls", "Seated Calf Raises", "Standing Calf Raises"]
+      "okay": [
+        { "name": "Squats", "sets": 3, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Calf Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Seated Calf Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Standing Calf Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ]
     },
     "sunday": {
-      "okay": ["Rest"],
-      "good": ["Rest"],
-      "great": ["Rest"]
+      "okay": [{ "name": "Rest", "type": "rest" }],
+      "good": [{ "name": "Rest", "type": "rest" }],
+      "great": [{ "name": "Rest", "type": "rest" }]
     }
   },
   "5-Day Bro Split": {
     "monday": {
-      "okay": ["Flat Bench Press", "Incline Dumbbell Press"],
-      "good": ["Flat Bench Press", "Incline Dumbbell Press", "Cable Flys", "Dips"],
-      "great": ["Flat Bench Press", "Incline Dumbbell Press", "Decline Bench", "Cable Flys", "Dips", "Push-Ups"]
+      "okay": [
+        { "name": "Flat Bench Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Flat Bench Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Cable Flys", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Dips", "sets": 3, "reps": "AMRAP", "rest": "60s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Flat Bench Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Decline Bench", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Cable Flys", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Dips", "sets": 3, "reps": "AMRAP", "rest": "60s", "type": "weight" },
+        { "name": "Push-Ups", "sets": 3, "reps": "AMRAP", "rest": "45s", "type": "weight" }
+      ]
     },
     "tuesday": {
-      "okay": ["Deadlifts", "Lat Pulldowns"],
-      "good": ["Deadlifts", "Lat Pulldowns", "Barbell Rows", "Face Pulls"],
-      "great": ["Deadlifts", "Lat Pulldowns", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Straight-Arm Pulldowns"]
+      "okay": [
+        { "name": "Deadlifts", "sets": 3, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "T-Bar Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Straight-Arm Pulldowns", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "wednesday": {
-      "okay": ["Overhead Press", "Lateral Raises"],
-      "good": ["Overhead Press", "Lateral Raises", "Front Raises", "Face Pulls"],
-      "great": ["Overhead Press", "Lateral Raises", "Front Raises", "Face Pulls", "Upright Rows", "Shrugs"]
+      "okay": [
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Overhead Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Front Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Overhead Press", "sets": 4, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Front Raises", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Upright Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Shrugs", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "thursday": {
-      "okay": ["Barbell Curls", "Triceps Dips"],
-      "good": ["Barbell Curls", "Hammer Curls", "Triceps Pushdowns", "Overhead Triceps Extension"],
-      "great": ["Barbell Curls", "Hammer Curls", "Preacher Curls", "Triceps Pushdowns", "Skull Crushers", "Overhead Triceps Extension"]
+      "okay": [
+        { "name": "Barbell Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Dips", "sets": 3, "reps": "AMRAP", "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Barbell Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Hammer Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Overhead Triceps Extension", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Barbell Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Hammer Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Preacher Curls", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Skull Crushers", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Triceps Extension", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ]
     },
     "friday": {
-      "okay": ["Squats", "Leg Press"],
-      "good": ["Squats", "Leg Press", "Romanian Deadlifts", "Leg Curls"],
-      "great": ["Squats", "Leg Press", "Romanian Deadlifts", "Bulgarian Split Squats", "Leg Extensions", "Leg Curls"]
+      "okay": [
+        { "name": "Squats", "sets": 3, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "120s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "saturday": {
-      "okay": ["Rest"],
-      "good": ["Light Walk"],
-      "great": ["Cardio"]
+      "okay": [{ "name": "Rest", "type": "rest" }],
+      "good": [{ "name": "Light Walk", "duration": "20min", "type": "cardio" }],
+      "great": [{ "name": "Cardio", "duration": "30min", "type": "cardio" }]
     },
     "sunday": {
-      "okay": ["Rest"],
-      "good": ["Light Walk"],
-      "great": ["Cardio"]
+      "okay": [{ "name": "Rest", "type": "rest" }],
+      "good": [{ "name": "Light Walk", "duration": "20min", "type": "cardio" }],
+      "great": [{ "name": "Cardio", "duration": "30min", "type": "cardio" }]
     }
-  },
+    },
   "For The Girls": {
     "monday": {
-      "okay": ["Hip Thrusts", "Romanian Deadlifts", "Glute Kickbacks"],
-      "good": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs"],
-      "great": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs", "Glute Bridges", "Seated Leg Curls"]
+      "okay": [
+        { "name": "Hip Thrusts", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Glute Kickbacks", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Hip Thrusts", "sets": 4, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Cable Pull-Throughs", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Hip Thrusts", "sets": 4, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Cable Pull-Throughs", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Glute Bridges", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Seated Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "tuesday": {
-      "okay": ["Squats", "Leg Extensions"],
-      "good": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups"],
-      "great": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups", "Lunges", "Hack Squats"]
+      "okay": [
+        { "name": "Squats", "sets": 3, "reps": 10, "rest": "90s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squats", "sets": 4, "reps": 10, "rest": "90s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Front Squats", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Step-Ups", "sets": 3, "reps": 10, "rest": "60s", "type": "bodyweight" }
+      ],
+      "great": [
+        { "name": "Squats", "sets": 4, "reps": 10, "rest": "90s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Front Squats", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Step-Ups", "sets": 3, "reps": 10, "rest": "60s", "type": "bodyweight" },
+        { "name": "Lunges", "sets": 3, "reps": 12, "rest": "60s", "type": "bodyweight" },
+        { "name": "Hack Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ]
     },
     "wednesday": {
-      "okay": ["Lat Pulldowns", "Seated Rows"],
-      "good": ["Lat Pulldowns", "Seated Rows", "Dumbbell Press", "Bicep Curls"],
-      "great": ["Lat Pulldowns", "Seated Rows", "Dumbbell Press", "Face Pulls", "Bicep Curls", "Triceps Pushdowns"]
+      "okay": [
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Seated Rows", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Seated Rows", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Bicep Curls", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Seated Rows", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" },
+        { "name": "Bicep Curls", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" }
+      ]
     },
     "thursday": {
-      "okay": ["Rest"],
-      "good": ["Light Walk"],
-      "great": ["Yoga"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Light Walk", "sets": 1, "reps": 30, "rest": "", "type": "cardio" }
+      ],
+      "great": [
+        { "name": "Yoga", "sets": 1, "reps": 60, "rest": "", "type": "mobility" }
+      ]
     },
     "friday": {
-      "okay": ["Hip Thrusts", "Romanian Deadlifts", "Glute Kickbacks"],
-      "good": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs"],
-      "great": ["Hip Thrusts", "Romanian Deadlifts", "Bulgarian Split Squats", "Cable Pull-Throughs", "Glute Bridges", "Seated Leg Curls"]
+      "okay": [
+        { "name": "Hip Thrusts", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Glute Kickbacks", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Hip Thrusts", "sets": 4, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Cable Pull-Throughs", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Hip Thrusts", "sets": 4, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Cable Pull-Throughs", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Glute Bridges", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Seated Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "saturday": {
-      "okay": ["Squats", "Leg Extensions"],
-      "good": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups"],
-      "great": ["Squats", "Leg Extensions", "Front Squats", "Step-Ups", "Lunges", "Hack Squats"]
+      "okay": [
+        { "name": "Squats", "sets": 3, "reps": 10, "rest": "90s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squats", "sets": 4, "reps": 10, "rest": "90s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Front Squats", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Step-Ups", "sets": 3, "reps": 10, "rest": "60s", "type": "bodyweight" }
+      ],
+      "great": [
+        { "name": "Squats", "sets": 4, "reps": 10, "rest": "90s", "type": "weight" },
+        { "name": "Leg Extensions", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Front Squats", "sets": 3, "reps": 8, "rest": "90s", "type": "weight" },
+        { "name": "Step-Ups", "sets": 3, "reps": 10, "rest": "60s", "type": "bodyweight" },
+        { "name": "Lunges", "sets": 3, "reps": 12, "rest": "60s", "type": "bodyweight" },
+        { "name": "Hack Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ]
     },
     "sunday": {
-      "okay": ["Rest"],
-      "good": ["Light Walk"],
-      "great": ["Yoga"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Light Walk", "sets": 1, "reps": 30, "rest": "", "type": "cardio" }
+      ],
+      "great": [
+        { "name": "Yoga", "sets": 1, "reps": 60, "rest": "", "type": "mobility" }
+      ]
     }
-  },
+    },
   "Hybrid Training": {
     "monday": {
-      "okay": ["Bench Press", "Overhead Press"],
-      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Triceps Dips"],
-      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Dips", "Skull Crushers"]
+      "okay": [
+        { "name": "Bench Press", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Bench Press", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Dips", "sets": 3, "reps": 12, "rest": "45s", "type": "bodyweight" }
+      ],
+      "great": [
+        { "name": "Bench Press", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Triceps Dips", "sets": 3, "reps": 12, "rest": "45s", "type": "bodyweight" },
+        { "name": "Skull Crushers", "sets": 3, "reps": 10, "rest": "45s", "type": "weight" }
+      ]
     },
     "tuesday": {
-      "okay": ["30-Minute Run"],
-      "good": ["45-Minute Run"],
-      "great": ["60-Minute Run"]
+      "okay": [
+        { "name": "30-Minute Run", "sets": 1, "reps": 30, "rest": "0s", "type": "cardio" }
+      ],
+      "good": [
+        { "name": "45-Minute Run", "sets": 1, "reps": 45, "rest": "0s", "type": "cardio" }
+      ],
+      "great": [
+        { "name": "60-Minute Run", "sets": 1, "reps": 60, "rest": "0s", "type": "cardio" }
+      ]
     },
     "wednesday": {
-      "okay": ["Squats", "Romanian Deadlifts"],
-      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls"],
-      "great": ["Squats", "Romanian Deadlifts", "Leg Press", "Bulgarian Split Squats", "Leg Curls", "Calf Raises"]
+      "okay": [
+        { "name": "Squats", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Calf Raises", "sets": 3, "reps": 15, "rest": "30s", "type": "weight" }
+      ]
     },
     "thursday": {
-      "okay": ["Sprint Intervals (10x30s)"],
-      "good": ["Hill Sprints (8x45s)"],
-      "great": ["Track Workout (400m repeats)"]
+      "okay": [
+        { "name": "Sprint Intervals (10x30s)", "sets": 10, "reps": 30, "rest": "90s", "type": "cardio" }
+      ],
+      "good": [
+        { "name": "Hill Sprints (8x45s)", "sets": 8, "reps": 45, "rest": "90s", "type": "cardio" }
+      ],
+      "great": [
+        { "name": "Track Workout (400m repeats)", "sets": 6, "reps": 400, "rest": "90s", "type": "cardio" }
+      ]
     },
     "friday": {
-      "okay": ["Deadlifts", "Pull-Ups"],
-      "good": ["Deadlifts", "Pull-Ups", "Barbell Rows", "Face Pulls"],
-      "great": ["Deadlifts", "Pull-Ups", "Barbell Rows", "T-Bar Rows", "Face Pulls", "Hammer Curls"]
+      "okay": [
+        { "name": "Deadlifts", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 3, "reps": 8, "rest": "60s", "type": "bodyweight" }
+      ],
+      "good": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 3, "reps": 8, "rest": "60s", "type": "bodyweight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" }
+      ],
+      "great": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 3, "reps": 8, "rest": "60s", "type": "bodyweight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "T-Bar Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" },
+        { "name": "Hammer Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ]
     },
     "saturday": {
-      "okay": ["45-Minute Run"],
-      "good": ["60-Minute Run"],
-      "great": ["90-Minute Run"]
+      "okay": [
+        { "name": "45-Minute Run", "sets": 1, "reps": 45, "rest": "0s", "type": "cardio" }
+      ],
+      "good": [
+        { "name": "60-Minute Run", "sets": 1, "reps": 60, "rest": "0s", "type": "cardio" }
+      ],
+      "great": [
+        { "name": "90-Minute Run", "sets": 1, "reps": 90, "rest": "0s", "type": "cardio" }
+      ]
     },
     "sunday": {
-      "okay": ["Rest"],
-      "good": ["Rest"],
-      "great": ["Rest"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "great": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ]
     }
   },
   "Intermediate": {
     "monday": {
-      "okay": ["Bench Press", "Overhead Press"],
-      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Triceps Pushdowns"],
-      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns", "Cable Flys"]
+      "okay": [
+        { "name": "Bench Press", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Bench Press", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "cable" }
+      ],
+      "great": [
+        { "name": "Bench Press", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "cable" },
+        { "name": "Cable Flys", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" }
+      ]
     },
     "tuesday": {
-      "okay": ["Deadlifts", "Barbell Rows"],
-      "good": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls"],
-      "great": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls", "T-Bar Rows", "Shrugs"]
+      "okay": [
+        { "name": "Deadlifts", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 12, "rest": "60s", "type": "cable" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" }
+      ],
+      "great": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 12, "rest": "60s", "type": "cable" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" },
+        { "name": "T-Bar Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Shrugs", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ]
     },
     "wednesday": {
-      "okay": ["Squats", "Romanian Deadlifts"],
-      "good": ["Squats", "Romanian Deadlifts", "Leg Press", "Leg Curls"],
-      "great": ["Squats", "Romanian Deadlifts", "Leg Press", "Bulgarian Split Squats", "Leg Curls", "Calf Raises"]
+      "okay": [
+        { "name": "Squats", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Squats", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Romanian Deadlifts", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Press", "sets": 3, "reps": 12, "rest": "60s", "type": "weight" },
+        { "name": "Bulgarian Split Squats", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Leg Curls", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Calf Raises", "sets": 3, "reps": 15, "rest": "30s", "type": "weight" }
+      ]
     },
     "thursday": {
-      "okay": ["Rest"],
-      "good": ["Light Walk"],
-      "great": ["Cardio"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Light Walk", "sets": 1, "reps": 30, "rest": "0s", "type": "cardio" }
+      ],
+      "great": [
+        { "name": "Cardio", "sets": 1, "reps": 45, "rest": "0s", "type": "cardio" }
+      ]
     },
     "friday": {
-      "okay": ["Bench Press", "Overhead Press"],
-      "good": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Triceps Pushdowns"],
-      "great": ["Bench Press", "Incline Dumbbell Press", "Overhead Press", "Lateral Raises", "Triceps Pushdowns", "Cable Flys"]
+      "okay": [
+        { "name": "Bench Press", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Bench Press", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "cable" }
+      ],
+      "great": [
+        { "name": "Bench Press", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 8, "rest": "60s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Triceps Pushdowns", "sets": 3, "reps": 12, "rest": "45s", "type": "cable" },
+        { "name": "Cable Flys", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" }
+      ]
     },
     "saturday": {
-      "okay": ["Deadlifts", "Barbell Rows"],
-      "good": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls"],
-      "great": ["Deadlifts", "Barbell Rows", "Lat Pulldowns", "Face Pulls", "T-Bar Rows", "Shrugs"]
+      "okay": [
+        { "name": "Deadlifts", "sets": 3, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 12, "rest": "60s", "type": "cable" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" }
+      ],
+      "great": [
+        { "name": "Deadlifts", "sets": 4, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Lat Pulldowns", "sets": 3, "reps": 12, "rest": "60s", "type": "cable" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" },
+        { "name": "T-Bar Rows", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Shrugs", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ]
     },
     "sunday": {
-      "okay": ["Rest"],
-      "good": ["Rest"],
-      "great": ["Rest"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "great": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ]
     }
   },
   "Boring But Big": {
     "monday": {
-      "okay": ["Bench Press (5/3/1)", "Bench Press (5x10)"],
-      "good": ["Bench Press (5/3/1)", "Bench Press (5x10)", "Incline Dumbbell Press", "Triceps Pushdowns"],
-      "great": ["Bench Press (5/3/1)", "Bench Press (5x10)", "Incline Dumbbell Press", "Cable Flys", "Triceps Pushdowns", "Skull Crushers"]
+      "okay": [
+        { "name": "Bench Press", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Dumbbell Bench Press", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Bench Press", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Dumbbell Bench Press", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Bench Press", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Dumbbell Bench Press", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Overhead Press", "sets": 3, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ]
     },
     "tuesday": {
-      "okay": ["Squats (5/3/1)", "Squats (5x10)"],
-      "good": ["Squats (5/3/1)", "Squats (5x10)", "Leg Press", "Leg Curls"],
-      "great": ["Squats (5/3/1)", "Squats (5x10)", "Leg Press", "Bulgarian Split Squats", "Leg Curls", "Calf Raises"]
+      "okay": [
+        { "name": "Squat", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Front Squat", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Squat", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Front Squat", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Calf Raises", "sets": 3, "reps": 15, "rest": "30s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Squat", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Front Squat", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Calf Raises", "sets": 3, "reps": 15, "rest": "30s", "type": "weight" },
+        { "name": "Walking Lunges", "sets": 2, "reps": 20, "rest": "60s", "type": "weight" }
+      ]
     },
     "wednesday": {
-      "okay": ["Overhead Press (5/3/1)", "Overhead Press (5x10)"],
-      "good": ["Overhead Press (5/3/1)", "Overhead Press (5x10)", "Lateral Raises", "Face Pulls"],
-      "great": ["Overhead Press (5/3/1)", "Overhead Press (5x10)", "Lateral Raises", "Front Raises", "Face Pulls", "Shrugs"]
+      "okay": [
+        { "name": "Deadlift", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Row", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Deadlift", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Row", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 3, "reps": 8, "rest": "60s", "type": "bodyweight" }
+      ],
+      "great": [
+        { "name": "Deadlift", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Barbell Row", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Pull-Ups", "sets": 3, "reps": 8, "rest": "60s", "type": "bodyweight" },
+        { "name": "Face Pulls", "sets": 3, "reps": 15, "rest": "45s", "type": "cable" }
+      ]
     },
     "thursday": {
-      "okay": ["Deadlifts (5/3/1)", "Deadlifts (5x10)"],
-      "good": ["Deadlifts (5/3/1)", "Deadlifts (5x10)", "Barbell Rows", "Lat Pulldowns"],
-      "great": ["Deadlifts (5/3/1)", "Deadlifts (5x10)", "Barbell Rows", "Lat Pulldowns", "T-Bar Rows", "Face Pulls"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Active Recovery", "sets": 1, "reps": 30, "rest": "0s", "type": "cardio" }
+      ],
+      "great": [
+        { "name": "Cardio (zone 2)", "sets": 1, "reps": 45, "rest": "0s", "type": "cardio" }
+      ]
     },
     "friday": {
-      "okay": ["Rest"],
-      "good": ["Light Walk"],
-      "great": ["Cardio"]
+      "okay": [
+        { "name": "Overhead Press", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Dumbbell Overhead Press", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" }
+      ],
+      "good": [
+        { "name": "Overhead Press", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Dumbbell Overhead Press", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Overhead Press", "sets": 5, "reps": 5, "rest": "90s", "type": "weight" },
+        { "name": "Dumbbell Overhead Press", "sets": 5, "reps": 10, "rest": "60s", "type": "weight" },
+        { "name": "Lateral Raises", "sets": 3, "reps": 15, "rest": "45s", "type": "weight" },
+        { "name": "Cable Upright Rows", "sets": 3, "reps": 12, "rest": "45s", "type": "cable" }
+      ]
     },
     "saturday": {
-      "okay": ["Rest"],
-      "good": ["Light Walk"],
-      "great": ["Cardio"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Optional Arms", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" }
+      ],
+      "great": [
+        { "name": "Optional Arms", "sets": 3, "reps": 12, "rest": "45s", "type": "weight" },
+        { "name": "Zone 2 Cardio", "sets": 1, "reps": 45, "rest": "0s", "type": "cardio" }
+      ]
     },
     "sunday": {
-      "okay": ["Rest"],
-      "good": ["Rest"],
-      "great": ["Rest"]
+      "okay": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "good": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ],
+      "great": [
+        { "name": "Rest", "sets": 0, "reps": 0, "rest": "N/A", "type": "rest" }
+      ]
     }
   }
 }
+

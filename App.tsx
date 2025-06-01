@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, ScrollView, StyleSheet, FlatList, Alert, TouchableOpacity, Platform, StatusBar, SafeAreaView } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
+
 import rawWorkoutTemplates from './assets/workoutTemplates.json';;
 import type { workoutTemplates } from 'src/types/workoutTypes';
 
@@ -46,6 +47,8 @@ interface WorkoutTemplates {
 }
 
 export default function App() {
+  const [restSeconds, setRestSeconds] = useState<number>(60); // default rest time in seconds
+  const [isResting, setIsResting] = useState<boolean>(false);
   const [mood, setMood] = useState<string>('Good');
   const [workouts, setWorkouts] = useState<WorkoutTemplates>({});
   const workoutTemplates = rawWorkoutTemplates as unknown as WorkoutTemplates;
@@ -63,6 +66,41 @@ export default function App() {
   const [suggestedExercises, setSuggestedExercises] = useState<ExerciseTemplate[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
+  useEffect(() => {
+  let interval: NodeJS.Timeout | null = null;
+
+  if (isResting && restSeconds > 0) {
+    interval = setInterval(() => {
+      setRestSeconds(prev => prev - 1);
+    }, 1000);
+  } else if (restSeconds === 0) {
+    setIsResting(false);
+    Alert.alert('Rest Complete', 'Time to start your next set!');
+  }
+
+  return () => {
+    if (interval) clearInterval(interval);
+  };
+}, [isResting]);
+
+
+  useEffect(() => {
+  let interval: NodeJS.Timeout | null = null;
+
+  if (isResting && restSeconds > 0) {
+    interval = setInterval(() => {
+      setRestSeconds(prev => prev - 1);
+    }, 1000);
+  } else if (restSeconds === 0) {
+    setIsResting(false);
+    Alert.alert('Rest Complete', 'Time to start your next set!');
+    // TODO: Add sound or vibration feedback if you want
+  }
+
+  return () => {
+    if (interval) clearInterval(interval);
+  };
+}, [isResting, restSeconds]);
 
   useEffect(() => {
     try {
@@ -77,7 +115,7 @@ export default function App() {
       setIsLoading(false);
   }
 }, []);
-
+  
   const generateSuggestedWorkout = () => {
     if (isLoading) {
       Alert.alert('Loading', 'Workout templates are still loading');
@@ -228,6 +266,7 @@ useEffect(() => {
   };
 
   return (
+    
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -250,7 +289,30 @@ useEffect(() => {
             <Text style={[styles.toggleText, mode === 'Custom' && styles.activeToggleText]}>Custom</Text>
           </TouchableOpacity>
         </View>
-        
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+        <Text style={{ color: "#fff", marginRight: 10 }}>Rest Timer: {restSeconds}s</Text>
+  
+        {!isResting ? (
+        <TouchableOpacity onPress={() => setIsResting(true)} style={styles.restButton}>
+        <Text style={styles.restButtonText}>Start Rest</Text>
+        </TouchableOpacity>
+        ) : (
+        <TouchableOpacity onPress={() => setIsResting(false)} style={styles.restButton}>
+        <Text style={styles.restButtonText}>Pause</Text>
+        </TouchableOpacity>
+  )}
+
+  <TouchableOpacity
+    onPress={() => {
+      setIsResting(false);
+      setRestSeconds(60);
+    }}
+    style={[styles.restButton, { marginLeft: 10 }]}
+  >
+    <Text style={styles.restButtonText}>Reset</Text>
+  </TouchableOpacity>
+</View>
+
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Today's Activity</Text>
           
@@ -549,6 +611,19 @@ useEffect(() => {
 }
 
 const styles = StyleSheet.create({
+
+   restButton: {
+    backgroundColor: '#4CAF50', // green button
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 4,
+  },
+
+  restButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 14,
+  },
   safeArea: {
     flex: 1,
     backgroundColor: '#121212',

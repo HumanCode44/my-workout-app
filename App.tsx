@@ -3,23 +3,17 @@ import { View, Text, TextInput, ScrollView, StyleSheet, FlatList, Alert, Touchab
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 
-import rawWorkoutTemplates from './assets/workoutTemplates.json';;
-import type { workoutTemplates } from 'src/types/workoutTypes';
-
 type ExerciseType = 'weight' | 'cardio' | 'bodyweight' | 'yoga';
 
 interface ExerciseTemplate {
   name: string;
   type: ExerciseType;
   sets?: number;
-  reps?: number | string;  // Allow both numbers and strings
+  reps?: number | string;
   weight?: number;
   rest?: string;
   duration?: string;
-  work?: string;
-  description?: string;
-  notes?: string;
-  key?: string; // Add this line
+  key: string;
 }
 
 interface WorkoutEntry {
@@ -30,7 +24,7 @@ interface WorkoutEntry {
   workoutName: string;
   exercise: string;
   sets?: number;
-  reps?: number | string;  // Allow both numbers and strings
+  reps?: number | string;
   weight?: number;
   duration?: string;
   rest?: string;
@@ -46,14 +40,15 @@ interface WorkoutTemplates {
   };
 }
 
+const rawWorkoutTemplates: WorkoutTemplates = require('./assets/workoutTemplates.json');
+
 export default function App() {
-  const [restSeconds, setRestSeconds] = useState<number>(60); // default rest time in seconds
+  const [restSeconds, setRestSeconds] = useState<number>(60);
   const [isResting, setIsResting] = useState<boolean>(false);
   const [mood, setMood] = useState<string>('Good');
   const [workouts, setWorkouts] = useState<WorkoutTemplates>({});
-  const workoutTemplates = rawWorkoutTemplates as unknown as WorkoutTemplates;
   const [day, setDay] = useState<string>('Monday');
-  const [program, setProgram] = useState<string>(Object.keys(workoutTemplates)[0]);
+  const [program, setProgram] = useState<string>(Object.keys(rawWorkoutTemplates)[0]);
   const [mode, setMode] = useState<'Suggested' | 'Custom'>('Suggested');
   const [workoutLog, setWorkoutLog] = useState<WorkoutEntry[]>([]);
   const [workoutName, setWorkoutName] = useState<string>('');
@@ -65,114 +60,97 @@ export default function App() {
   const [duration, setDuration] = useState<string>('30min');
   const [suggestedExercises, setSuggestedExercises] = useState<ExerciseTemplate[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(() => {
-  let interval: NodeJS.Timeout | null = null;
-
-  if (isResting && restSeconds > 0) {
-    interval = setInterval(() => {
-      setRestSeconds(prev => prev - 1);
-    }, 1000);
-  } else if (restSeconds === 0) {
-    setIsResting(false);
-    Alert.alert('Rest Complete', 'Time to start your next set!');
-  }
-
-  return () => {
-    if (interval) clearInterval(interval);
-  };
-}, [isResting]);
-
-
-  useEffect(() => {
-  let interval: NodeJS.Timeout | null = null;
-
-  if (isResting && restSeconds > 0) {
-    interval = setInterval(() => {
-      setRestSeconds(prev => prev - 1);
-    }, 1000);
-  } else if (restSeconds === 0) {
-    setIsResting(false);
-    Alert.alert('Rest Complete', 'Time to start your next set!');
-    // TODO: Add sound or vibration feedback if you want
-  }
-
-  return () => {
-    if (interval) clearInterval(interval);
-  };
-}, [isResting, restSeconds]);
+  const [activeRestExerciseKey, setActiveRestExerciseKey] = useState<string | null>(null);
+  const [exerciseRestSeconds, setExerciseRestSeconds] = useState<number>(0);
 
   useEffect(() => {
     try {
-      setWorkouts(workoutTemplates);
-      // Set to first program if not set
-      if (!program && Object.keys(workoutTemplates).length > 0) {
-        setProgram(Object.keys(workoutTemplates)[0]);
-      }
+      setWorkouts(rawWorkoutTemplates);
       setIsLoading(false);
     } catch (error) {
       console.error('Error loading templates:', error);
       setIsLoading(false);
-  }
-}, []);
-  
+    }
+  }, []);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isResting && restSeconds > 0) {
+      interval = setInterval(() => {
+        setRestSeconds(prev => prev - 1);
+      }, 1000);
+    } else if (restSeconds === 0) {
+      setIsResting(false);
+      Alert.alert('Rest Complete', 'Time to start your next set!');
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isResting, restSeconds]);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (activeRestExerciseKey && exerciseRestSeconds > 0) {
+      interval = setInterval(() => {
+        setExerciseRestSeconds((prev) => prev - 1);
+      }, 1000);
+    } else if (activeRestExerciseKey && exerciseRestSeconds === 0) {
+      Alert.alert('Rest Complete', 'Time to start your next set!');
+      setActiveRestExerciseKey(null);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [activeRestExerciseKey, exerciseRestSeconds]);
+
+  const startExerciseRestTimer = (rest: string, exerciseKey: string) => {
+    const seconds = parseInt(rest.replace(/\D/g, '')) || 60;
+    setExerciseRestSeconds(seconds);
+    setActiveRestExerciseKey(exerciseKey);
+  };
+
   const generateSuggestedWorkout = () => {
     if (isLoading) {
       Alert.alert('Loading', 'Workout templates are still loading');
       return;
     }
     
-    const focusProgram = program;
-    const focusDay = day.toLowerCase();
-    const moodLevel = mood.toLowerCase();
-
-    console.log(`Looking for: ${focusProgram}.${focusDay}.${moodLevel}`); // Debug
-
-    const suggested = workouts[focusProgram]?.[focusDay]?.[moodLevel] || [];
-    console.log("Found exercises:", suggested); // Debug
+    const suggested = workouts[program]?.[day.toLowerCase()]?.[mood.toLowerCase()] || [];
     
-    const exercises = suggested.map((ex, index) => {
-      return {
-        ...ex,
-        weight: ex.weight || 0,
-        key: `ex-${index}-${Date.now()}`
-      };
-    });
+    const exercises = suggested.map((ex, index) => ({
+      ...ex,
+      weight: ex.weight || 0,
+      key: ex.key || `ex-${index}-${Date.now()}`
+    }));
     
     setSuggestedExercises(exercises);
   };
 
   const saveSuggestedWorkout = () => {
-  const newEntries: WorkoutEntry[] = suggestedExercises.map(ex => ({
-    date: new Date().toISOString().split('T')[0],
-    day,
-    mood,
-    program,
-    workoutName: `${program} Workout`,
-    exercise: ex.name,
-    sets: ex.sets,
-    reps: ex.reps,  // This can now be number or string
-    weight: ex.weight,
-    duration: ex.duration,
-    rest: ex.rest,
-    type: ex.type,
-    key: `entry-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-  }));
-  
-  setWorkoutLog([...workoutLog, ...newEntries]);
-  Alert.alert('Success', 'Workout saved to your log!');
-};
-useEffect(() => {
-  try {
-    setWorkouts(workoutTemplates);
-    console.log("Loaded templates:", Object.keys(workoutTemplates)); // Debug log
-    setIsLoading(false);
-  } catch (error) {
-    console.error('Error loading templates:', error);
-    Alert.alert('Error', 'Failed to load templates');
-    setIsLoading(false);
-  }
-}, []);
+    const newEntries: WorkoutEntry[] = suggestedExercises.map(ex => ({
+      date: new Date().toISOString().split('T')[0],
+      day,
+      mood,
+      program,
+      workoutName: `${program} Workout`,
+      exercise: ex.name,
+      sets: ex.sets,
+      reps: ex.reps,
+      weight: ex.weight,
+      duration: ex.duration,
+      rest: ex.rest,
+      type: ex.type,
+      key: `entry-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+    }));
+    
+    setWorkoutLog([...workoutLog, ...newEntries]);
+    Alert.alert('Success', 'Workout saved to your log!');
+  };
+
   const addCustomExercise = () => {
     if (!workoutName || !exercise) {
       Alert.alert('Error', 'Please fill in all fields');
@@ -260,13 +238,96 @@ useEffect(() => {
     );
   };
 
-  const isCardioOrYoga = () => {
-    const lowerCaseExercise = exercise.toLowerCase();
-    return ['walk', 'run', 'yoga', 'stretch', 'meditation'].includes(lowerCaseExercise);
+ const renderExerciseInputs = (ex: ExerciseTemplate, index: number) => {
+    switch (ex.type) {
+      case 'cardio':
+      case 'yoga':
+        return (
+          <View style={styles.inputRow}>
+            <Text style={styles.inputLabel}>Duration:</Text>
+            <TextInput
+              style={styles.numberInput}
+              value={ex.duration || ''}
+              onChangeText={(text) => {
+                const newExercises = [...suggestedExercises];
+                newExercises[index].duration = text;
+                setSuggestedExercises(newExercises);
+              }}
+              placeholder="e.g., 30min"
+            />
+          </View>
+        );
+      
+      case 'weight':
+      case 'bodyweight':
+        return (
+          <>
+            {ex.type === 'weight' && (
+              <View style={styles.inputRow}>
+                <Text style={styles.inputLabel}>Weight (lbs):</Text>
+                <TextInput
+                  style={styles.numberInput}
+                  keyboardType="numeric"
+                  value={ex.weight?.toString() || '0'}
+                  onChangeText={(text) => {
+                    const newExercises = [...suggestedExercises];
+                    newExercises[index].weight = parseInt(text) || 0;
+                    setSuggestedExercises(newExercises);
+                  }}
+                />
+              </View>
+            )}
+            
+            <View style={styles.inputRow}>
+              <Text style={styles.inputLabel}>Sets:</Text>
+              <TextInput
+                style={styles.numberInput}
+                keyboardType="numeric"
+                value={ex.sets?.toString() || '3'}
+                onChangeText={(text) => {
+                  const newExercises = [...suggestedExercises];
+                  newExercises[index].sets = parseInt(text) || 1;
+                  setSuggestedExercises(newExercises);
+                }}
+              />
+            </View>
+            
+            <View style={styles.inputRow}>
+              <Text style={styles.inputLabel}>Reps:</Text>
+              <TextInput
+                style={styles.numberInput}
+                keyboardType="numeric"
+                value={ex.reps?.toString() || '10'}
+                onChangeText={(text) => {
+                  const newExercises = [...suggestedExercises];
+                  newExercises[index].reps = parseInt(text) || 1;
+                  setSuggestedExercises(newExercises);
+                }}
+              />
+            </View>
+            
+            <View style={styles.inputRow}>
+              <Text style={styles.inputLabel}>Rest:</Text>
+              <TextInput
+                style={styles.numberInput}
+                value={ex.rest || ''}
+                onChangeText={(text) => {
+                  const newExercises = [...suggestedExercises];
+                  newExercises[index].rest = text;
+                  setSuggestedExercises(newExercises);
+                }}
+                placeholder="e.g., 60s"
+              />
+            </View>
+          </>
+        );
+      
+      default:
+        return null;
+    }
   };
 
   return (
-    
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="light-content" />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -289,35 +350,47 @@ useEffect(() => {
             <Text style={[styles.toggleText, mode === 'Custom' && styles.activeToggleText]}>Custom</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-        <Text style={{ color: "#fff", marginRight: 10 }}>Rest Timer: {restSeconds}s</Text>
-  
-        {!isResting ? (
-        <TouchableOpacity onPress={() => setIsResting(true)} style={styles.restButton}>
-        <Text style={styles.restButtonText}>Start Rest</Text>
-        </TouchableOpacity>
-        ) : (
-        <TouchableOpacity onPress={() => setIsResting(false)} style={styles.restButton}>
-        <Text style={styles.restButtonText}>Pause</Text>
-        </TouchableOpacity>
-  )}
 
-  <TouchableOpacity
-    onPress={() => {
-      setIsResting(false);
-      setRestSeconds(60);
-    }}
-    style={[styles.restButton, { marginLeft: 10 }]}
-  >
-    <Text style={styles.restButtonText}>Reset</Text>
-  </TouchableOpacity>
-</View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+          <Text style={{ color: "#fff", marginRight: 10 }}>Rest Timer: {restSeconds}s</Text>
+  
+          {!isResting ? (
+            <TouchableOpacity onPress={() => setIsResting(true)} style={styles.restButton}>
+              <Text style={styles.restButtonText}>Start Rest</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={() => setIsResting(false)} style={styles.restButton}>
+              <Text style={styles.restButtonText}>Pause</Text>
+            </TouchableOpacity>
+          )}
+
+          <TouchableOpacity
+            onPress={() => {
+              setIsResting(false);
+              setRestSeconds(60);
+            }}
+            style={[styles.restButton, { marginLeft: 10 }]}
+          >
+            <Text style={styles.restButtonText}>Reset</Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Today's Activity</Text>
           
           <Text style={styles.label}>What program are you working on?</Text>
-          
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {Object.keys(workouts).map(p => (
+              <TouchableOpacity
+                key={p}
+                style={[styles.dayButton, program === p && styles.activeDayButton]}
+                onPress={() => setProgram(p)}
+              >
+                <Text style={styles.dayButtonText}>{p}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+
           <Text style={styles.label}>How are you feeling?</Text>
           <View style={styles.segmentedControl}>
             {['Okay', 'Good', 'Great'].map(option => (
@@ -326,24 +399,13 @@ useEffect(() => {
                 style={[styles.segment, mood === option && styles.activeSegment]}
                 onPress={() => setMood(option)}
               >
-                <Text style={[styles.segmentText, mood === option && styles.activeSegmentText]}>{option}</Text>
+                <Text style={[styles.segmentText, mood === option && styles.activeSegmentText]}>
+                  {option}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {Object.keys(workouts).map(p => (
-              <TouchableOpacity
-              key={p}
-              style={[styles.dayButton, program === p && styles.activeDayButton]}
-              onPress={() => {
-              console.log("Selected program:", p); // Debug log
-              setProgram(p);
-              }}
-              >
-              <Text style={styles.dayButtonText}>{p}</Text>
-              </TouchableOpacity>
-              ))}
-              </ScrollView>
+
           <Text style={styles.label}>What day is it?</Text>
           <ScrollView 
             horizontal 
@@ -356,7 +418,9 @@ useEffect(() => {
                 style={[styles.dayButton, day === d && styles.activeDayButton]}
                 onPress={() => setDay(d)}
               >
-                <Text style={[styles.dayButtonText, day === d && styles.activeDayButtonText]}>{d.substring(0, 3)}</Text>
+                <Text style={[styles.dayButtonText, day === d && styles.activeDayButtonText]}>
+                  {d.substring(0, 3)}
+                </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -380,94 +444,29 @@ useEffect(() => {
                 {suggestedExercises.map((ex, index) => (
                   <View key={ex.key} style={styles.exerciseCard}>
                     <Text style={styles.exerciseName}>{ex.name}</Text>
-                    {ex.type === 'cardio' || ex.type === 'yoga' ? (
-                      <Text style={styles.exerciseSubtitle}>
-                        Duration: {ex.duration || 'Not specified'}
-                      </Text>
-                    ) : (
-                      <Text style={styles.exerciseSubtitle}>
-                        Suggested: {ex.sets || 3} sets × {ex.reps || 10} reps
-                        {ex.rest ? ` (Rest: ${ex.rest})` : ''}
-                      </Text>
+                    <Text style={styles.exerciseSubtitle}>
+                      {ex.type === 'cardio' || ex.type === 'yoga' 
+                        ? `Duration: ${ex.duration || 'Not specified'}` 
+                        : `Suggested: ${ex.sets || 3} sets × ${ex.reps || 10} reps${ex.rest ? ` (Rest: ${ex.rest})` : ''}`
+                      }
+                    </Text>
+                    
+                    {ex.rest && (
+                      activeRestExerciseKey === ex.key ? (
+                        <Text style={styles.restTimerText}>
+                          ⏱ Resting: {exerciseRestSeconds}s left
+                        </Text>
+                      ) : (
+                        <TouchableOpacity
+                          style={styles.restButton}
+                          onPress={() => ex.rest && startExerciseRestTimer(ex.rest, ex.key)}
+                        >
+                          <Text style={styles.restButtonText}>Start {ex.rest} Rest</Text>
+                        </TouchableOpacity>
+                      )
                     )}
                     
-                    {ex.type === 'weight' && (
-                      <View style={styles.inputRow}>
-                        <Text style={styles.inputLabel}>Weight (lbs):</Text>
-                        <TextInput
-                          style={styles.numberInput}
-                          keyboardType="numeric"
-                          value={ex.weight?.toString() || '0'}
-                          onChangeText={(text) => {
-                            const newExercises = [...suggestedExercises];
-                            newExercises[index].weight = parseInt(text) || 0;
-                            setSuggestedExercises(newExercises);
-                          }}
-                        />
-                      </View>
-                    )}
-                    
-                    {(ex.type === 'weight' || ex.type === 'bodyweight') && (
-                      <>
-                        <View style={styles.inputRow}>
-                          <Text style={styles.inputLabel}>Sets:</Text>
-                          <TextInput
-                            style={styles.numberInput}
-                            keyboardType="numeric"
-                            value={ex.sets?.toString() || '3'}
-                            onChangeText={(text) => {
-                              const newExercises = [...suggestedExercises];
-                              newExercises[index].sets = parseInt(text) || 1;
-                              setSuggestedExercises(newExercises);
-                            }}
-                          />
-                        </View>
-                        
-                        <View style={styles.inputRow}>
-                          <Text style={styles.inputLabel}>Reps:</Text>
-                          <TextInput
-                            style={styles.numberInput}
-                            keyboardType="numeric"
-                            value={ex.reps?.toString() || '10'}
-                            onChangeText={(text) => {
-                              const newExercises = [...suggestedExercises];
-                              newExercises[index].reps = parseInt(text) || 1;
-                              setSuggestedExercises(newExercises);
-                            }}
-                          />
-                        </View>
-                      </>
-                    )}
-                    
-                    {ex.type === 'cardio' || ex.type === 'yoga' ? (
-                      <View style={styles.inputRow}>
-                        <Text style={styles.inputLabel}>Duration:</Text>
-                        <TextInput
-                          style={styles.numberInput}
-                          value={ex.duration || ''}
-                          onChangeText={(text) => {
-                            const newExercises = [...suggestedExercises];
-                            newExercises[index].duration = text;
-                            setSuggestedExercises(newExercises);
-                          }}
-                          placeholder="e.g., 30min"
-                        />
-                      </View>
-                    ) : (
-                      <View style={styles.inputRow}>
-                        <Text style={styles.inputLabel}>Rest:</Text>
-                        <TextInput
-                          style={styles.numberInput}
-                          value={ex.rest || ''}
-                          onChangeText={(text) => {
-                            const newExercises = [...suggestedExercises];
-                            newExercises[index].rest = text;
-                            setSuggestedExercises(newExercises);
-                          }}
-                          placeholder="e.g., 60s"
-                        />
-                      </View>
-                    )}
+                    {renderExerciseInputs(ex, index)}
                   </View>
                 ))}
                 
@@ -502,7 +501,17 @@ useEffect(() => {
               onChangeText={setExercise}
             />
             
-            {!isCardioOrYoga() && (
+            {exercise.toLowerCase() === 'cardio' || exercise.toLowerCase() === 'yoga' ? (
+              <View style={styles.inputRow}>
+                <Text style={styles.inputLabel}>Duration:</Text>
+                <TextInput
+                  style={styles.numberInput}
+                  value={duration}
+                  onChangeText={setDuration}
+                  placeholder="e.g., 30min"
+                />
+              </View>
+            ) : (
               <>
                 <View style={styles.inputRow}>
                   <Text style={styles.inputLabel}>Sets:</Text>
@@ -544,18 +553,6 @@ useEffect(() => {
                   />
                 </View>
               </>
-            )}
-            
-            {isCardioOrYoga() && (
-              <View style={styles.inputRow}>
-                <Text style={styles.inputLabel}>Duration:</Text>
-                <TextInput
-                  style={styles.numberInput}
-                  value={duration}
-                  onChangeText={setDuration}
-                  placeholder="e.g., 30min"
-                />
-              </View>
             )}
             
             <TouchableOpacity
@@ -610,15 +607,19 @@ useEffect(() => {
   );
 }
 
+// Styles remain the same as in your original code
 const styles = StyleSheet.create({
-
-   restButton: {
-    backgroundColor: '#4CAF50', // green button
+  restTimerText: {
+    marginTop: 4,
+    color: '#ff5722',
+    fontWeight: 'bold',
+  },
+  restButton: {
+    backgroundColor: '#4CAF50',
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 4,
   },
-
   restButtonText: {
     color: 'white',
     fontWeight: '600',

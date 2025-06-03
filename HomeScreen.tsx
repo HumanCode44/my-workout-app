@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, ScrollView, StyleSheet, FlatList, Alert, TouchableOpacity, Platform, StatusBar, SafeAreaView } from 'react-native';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  ScrollView, 
+  FlatList, 
+  Alert, 
+  TouchableOpacity, 
+  SafeAreaView,
+  StatusBar
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { styles } from '../my-workout-app/styles';
-import GenerateSuggestedWorkout from '../my-workout-app/GenerateSuggestedWorkout';
-import { useNavigation } from '@react-navigation/native';
 
 type ExerciseType = 'weight' | 'cardio' | 'bodyweight' | 'yoga';
-
-interface ExerciseTemplate {
-  name: string;
-  type: ExerciseType;
-  sets?: number;
-  reps?: number | string;
-  weight?: number;
-  rest?: string;
-  duration?: string;
-  key: string;
-}
 
 interface WorkoutEntry {
   date: string;
@@ -38,7 +36,7 @@ interface WorkoutEntry {
 interface WorkoutTemplates {
   [program: string]: {
     [day: string]: {
-      [mood: string]: ExerciseTemplate[];
+      [mood: string]: any[];
     };
   };
 }
@@ -46,13 +44,13 @@ interface WorkoutTemplates {
 const rawWorkoutTemplates: WorkoutTemplates = require('./assets/workoutTemplates.json');
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const [restSeconds, setRestSeconds] = useState<number>(60);
   const [isResting, setIsResting] = useState<boolean>(false);
   const [mood, setMood] = useState<string>('Good');
   const [workouts, setWorkouts] = useState<WorkoutTemplates>({});
   const [day, setDay] = useState<string>('Monday');
   const [program, setProgram] = useState<string>(Object.keys(rawWorkoutTemplates)[0]);
-  const [mode, setMode] = useState<'Suggested' | 'Custom'>('Suggested');
   const [workoutLog, setWorkoutLog] = useState<WorkoutEntry[]>([]);
   const [workoutName, setWorkoutName] = useState<string>('');
   const [exercise, setExercise] = useState<string>('');
@@ -62,7 +60,7 @@ export default function HomeScreen() {
   const [rest, setRest] = useState<string>('60s');
   const [duration, setDuration] = useState<string>('30min');
   const [isLoading, setIsLoading] = useState(true);
-const navigation = useNavigation();
+
   useEffect(() => {
     try {
       setWorkouts(rawWorkoutTemplates);
@@ -185,21 +183,6 @@ const navigation = useNavigation();
           <Text style={styles.title}>🏋️ Workout Planner</Text>
           <Text style={styles.subtitle}>Generate suggested workouts or build your own session</Text>
         </View>
-        
-        <View style={styles.toggleContainer}>
-          <TouchableOpacity
-            style={[styles.toggleButton, mode === 'Suggested' && styles.activeToggle]}
-            onPress={() => setMode('Suggested')}
-          >
-            <Text style={[styles.toggleText, mode === 'Suggested' && styles.activeToggleText]}>Suggested</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.toggleButton, mode === 'Custom' && styles.activeToggle]}
-            onPress={() => setMode('Custom')}
-          >
-            <Text style={[styles.toggleText, mode === 'Custom' && styles.activeToggleText]}>Custom</Text>
-          </TouchableOpacity>
-        </View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
           <Text style={{ color: "#fff", marginRight: 10 }}>Rest Timer: {restSeconds}s</Text>
@@ -274,9 +257,7 @@ const navigation = useNavigation();
               </TouchableOpacity>
             ))}
           </ScrollView>
-        </View>
-        
-        {mode === 'Suggested' ? (
+          
           <TouchableOpacity
             style={styles.generateButton}
             onPress={() => navigation.navigate('GenerateWorkout', { 
@@ -291,7 +272,127 @@ const navigation = useNavigation();
           >
             <Text style={styles.generateButtonText}>Generate Workout</Text>
           </TouchableOpacity>
-        ) : null}
+        </View>
+
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Custom Workout</Text>
+          
+          <TextInput
+            style={styles.textInput}
+            placeholder="Workout Name (e.g., 'Leg Day')"
+            placeholderTextColor="#999"
+            value={workoutName}
+            onChangeText={setWorkoutName}
+          />
+          
+          <TextInput
+            style={styles.textInput}
+            placeholder="Exercise Name"
+            placeholderTextColor="#999"
+            value={exercise}
+            onChangeText={setExercise}
+          />
+          
+          {exercise.toLowerCase() === 'cardio' || exercise.toLowerCase() === 'yoga' ? (
+            <View style={styles.inputRow}>
+              <Text style={styles.inputLabel}>Duration:</Text>
+              <TextInput
+                style={styles.numberInput}
+                value={duration}
+                onChangeText={setDuration}
+                placeholder="e.g., 30min"
+              />
+            </View>
+          ) : (
+            <>
+              <View style={styles.inputRow}>
+                <Text style={styles.inputLabel}>Sets:</Text>
+                <TextInput
+                  style={styles.numberInput}
+                  keyboardType="numeric"
+                  value={sets.toString()}
+                  onChangeText={(text) => setSets(parseInt(text) || 1)}
+                />
+              </View>
+              
+              <View style={styles.inputRow}>
+                <Text style={styles.inputLabel}>Reps:</Text>
+                <TextInput
+                  style={styles.numberInput}
+                  keyboardType="numeric"
+                  value={reps.toString()}
+                  onChangeText={(text) => setReps(parseInt(text) || 1)}
+                />
+              </View>
+              
+              <View style={styles.inputRow}>
+                <Text style={styles.inputLabel}>Weight (lbs):</Text>
+                <TextInput
+                  style={styles.numberInput}
+                  keyboardType="numeric"
+                  value={weight.toString()}
+                  onChangeText={(text) => setWeight(parseInt(text) || 0)}
+                />
+              </View>
+              
+              <View style={styles.inputRow}>
+                <Text style={styles.inputLabel}>Rest:</Text>
+                <TextInput
+                  style={styles.numberInput}
+                  value={rest}
+                  onChangeText={setRest}
+                  placeholder="e.g., 60s"
+                />
+              </View>
+            </>
+          )}
+          
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={addCustomExercise}
+          >
+            <Text style={styles.addButtonText}>Add Exercise</Text>
+          </TouchableOpacity>
+          
+          {workoutLog.length > 0 && (
+            <View style={styles.logSection}>
+              <Text style={styles.sectionTitle}>Your Workout Log</Text>
+              <FlatList
+                data={workoutLog}
+                renderItem={({ item }) => (
+                  <View style={styles.logEntry}>
+                    <Text style={styles.logHeader}>{item.workoutName} - {item.day} ({item.program})</Text>
+                    {item.type === 'cardio' || item.type === 'yoga' ? (
+                      <Text style={styles.logText}>{item.exercise}: {item.duration}</Text>
+                    ) : (
+                      <Text style={styles.logText}>
+                        {item.exercise}: {item.sets}×{item.reps} @ {item.weight}lbs
+                        {item.rest ? ` (Rest: ${item.rest})` : ''}
+                      </Text>
+                    )}
+                  </View>
+                )}
+                keyExtractor={item => item.key}
+              />
+              
+              <View style={styles.buttonRow}>
+                <TouchableOpacity
+                  style={styles.clearButton}
+                  onPress={clearLog}
+                >
+                  <Text style={styles.clearButtonText}>Clear Log</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={styles.exportButton}
+                  onPress={saveToCSV}
+                >
+                  <Text style={styles.exportButtonText}>Export as CSV</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

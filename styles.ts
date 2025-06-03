@@ -1,0 +1,276 @@
+import { StyleSheet, Platform } from 'react-native';
+
+export const styles = StyleSheet.create({
+  restTimerText: {
+    marginTop: 4,
+    color: '#ff5722',
+    fontWeight: 'bold',
+  },
+  restButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 4,
+  },
+  restButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#121212',
+  },
+  scrollContainer: {
+    padding: 16,
+    paddingBottom: 32,
+  },
+  header: {
+    marginTop: Platform.OS === 'ios' ? 0 : 20,
+    marginBottom: 24,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+    color: '#ffffff',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#aaaaaa',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  toggleContainer: {
+    flexDirection: 'row',
+    borderRadius: 10,
+    backgroundColor: '#333333',
+    overflow: 'hidden',
+    marginBottom: 16,
+  },
+  toggleButton: {
+    flex: 1,
+    paddingVertical: 14,
+    alignItems: 'center',
+  },
+  activeToggle: {
+    backgroundColor: '#4a90e2',
+  },
+  toggleText: {
+    fontWeight: '600',
+    color: '#aaaaaa',
+    fontSize: 16,
+  },
+  activeToggleText: {
+    color: '#ffffff',
+  },
+  card: {
+    backgroundColor: '#1e1e1e',
+    borderRadius: 12,
+    padding: 18,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    color: '#ffffff',
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 10,
+    color: '#dddddd',
+  },
+  segmentedControl: {
+    flexDirection: 'row',
+    borderRadius: 10,
+    backgroundColor: '#333333',
+    overflow: 'hidden',
+    marginBottom: 20,
+  },
+  segment: {
+    flex: 1,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  activeSegment: {
+    backgroundColor: '#4a90e2',
+  },
+  segmentText: {
+    fontWeight: '500',
+    color: '#aaaaaa',
+  },
+  activeSegmentText: {
+    color: '#ffffff',
+  },
+  daysContainer: {
+    paddingBottom: 8,
+    marginBottom: 20,
+  },
+  dayButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginRight: 10,
+    backgroundColor: '#333333',
+  },
+  activeDayButton: {
+    backgroundColor: '#4a90e2',
+  },
+  dayButtonText: {
+    fontWeight: '500',
+    color: '#aaaaaa',
+  },
+  activeDayButtonText: {
+    color: '#ffffff',
+  },
+  generateButton: {
+    backgroundColor: '#4a90e2',
+    borderRadius: 10,
+    padding: 14,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  generateButtonText: {
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  exerciseCard: {
+    backgroundColor: '#252525',
+    borderRadius: 10,
+    padding: 16,
+    marginBottom: 14,
+  },
+  exerciseName: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginBottom: 6,
+    color: '#ffffff',
+  },
+  exerciseSubtitle: {
+    fontSize: 14,
+    color: '#aaaaaa',
+    marginBottom: 16,
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#444444',
+    borderRadius: 10,
+    padding: 14,
+    marginBottom: 16,
+    fontSize: 16,
+    backgroundColor: '#252525',
+    color: '#ffffff',
+  },
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  inputLabel: {
+    fontSize: 16,
+    color: '#dddddd',
+  },
+  numberInput: {
+    borderWidth: 1,
+    borderColor: '#444444',
+    borderRadius: 10,
+    padding: 12,
+    width: 80,
+    textAlign: 'center',
+    fontSize: 16,
+    backgroundColor: '#252525',
+    color: '#ffffff',
+  },
+  placeholderText: {
+    color: '#666666',
+    textAlign: 'center',
+    paddingVertical: 24,
+    fontSize: 15,
+  },
+  logSection: {
+    marginTop: 24,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    color: '#ffffff',
+  },
+  logEntry: {
+    backgroundColor: '#252525',
+    borderRadius: 10,
+    padding: 14,
+    marginBottom: 10,
+  },
+  logHeader: {
+    fontWeight: 'bold',
+    marginBottom: 6,
+    color: '#ffffff',
+  },
+  logText: {
+    color: '#aaaaaa',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  addButton: {
+    backgroundColor: '#4a90e2',
+    borderRadius: 10,
+    padding: 16,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  addButtonText: {
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  saveButton: {
+    backgroundColor: '#2e7d32',
+    borderRadius: 10,
+    padding: 16,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  saveButtonText: {
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  clearButton: {
+    backgroundColor: '#333333',
+    borderRadius: 10,
+    padding: 14,
+    flex: 1,
+    marginRight: 10,
+    alignItems: 'center',
+  },
+  clearButtonText: {
+    color: '#ffffff',
+    fontWeight: '600',
+  },
+  exportButton: {
+    backgroundColor: '#4a90e2',
+    borderRadius: 10,
+    padding: 14,
+    flex: 1,
+    marginLeft: 10,
+    alignItems: 'center',
+  },
+  exportButtonText: {
+    color: '#ffffff',
+    fontWeight: '600',
+  },
+});

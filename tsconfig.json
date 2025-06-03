@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "node16",
+    "module": "nodenext",
     "jsx": "react-native",
     "strict": true,
     "noEmit": true,
-    "moduleResolution": "node16",
+    "moduleResolution": "nodenext",
     "baseUrl": ".",
     "paths": {
       "@/*": [
